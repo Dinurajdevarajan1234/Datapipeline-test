@@ -1,0 +1,70 @@
+apiVersion: v1
+entries:
+  aerospike-chart:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2025-08-14T09:31:40.425135673Z"
+    description: Custom Aerospike StatefulSet with tools sidecar for Unosecur Datapipeline
+      POC Project
+    digest: 44a8416ba35b0fa9bc30352a2deb15b264807da459d09cae1cb144148780f1cf
+    name: aerospike-chart
+    type: application
+    urls:
+    - https://dinurajdevarajan1234.github.io/Datapipeline-test/aerospike-chart-0.1.0.tgz
+    version: 0.1.0
+  clickhouse-chart:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2025-08-14T09:31:40.425486102Z"
+    description: Custom ClickHouse StatefulSet with config and services for Unosecur
+      Datapipeline POC project
+    digest: 586e23edca8d8a3f63168c3c1dc7a07db4c330974712b54fa3aff395ef36cf29
+    name: clickhouse-chart
+    type: application
+    urls:
+    - https://dinurajdevarajan1234.github.io/Datapipeline-test/clickhouse-chart-0.1.0.tgz
+    version: 0.1.0
+  kafka:
+  - annotations:
+      category: Infrastructure
+      images: |
+        - name: jmx-exporter
+          image: docker.io/bitnami/jmx-exporter:1.3.0-debian-12-r6
+        - name: kafka
+          image: docker.io/bitnami/kafka:4.0.0-debian-12-r10
+        - name: kubectl
+          image: docker.io/bitnami/kubectl:1.33.3-debian-12-r3
+        - name: os-shell
+          image: docker.io/bitnami/os-shell:12-debian-12-r50
+      licenses: Apache-2.0
+      tanzuCategory: service
+    apiVersion: v2
+    appVersion: 4.0.0
+    created: "2025-08-14T09:31:40.434197589Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: Apache Kafka is a distributed streaming platform designed to build
+      real-time pipelines and can be used as a message broker or as a replacement
+      for a log aggregation solution for big data applications.
+    digest: 1edccbdac19e5ceea1e927522acadb424467d9f7c22dc49c2dc9b8d5052e66af
+    home: https://bitnami.com
+    icon: https://dyltqmyl993wv.cloudfront.net/assets/stacks/kafka/img/kafka-stack-220x234.png
+    keywords:
+    - kafka
+    - streaming
+    - producer
+    - consumer
+    maintainers:
+    - name: Broadcom, Inc. All Rights Reserved.
+      url: https://github.com/bitnami/charts
+    name: kafka
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/kafka
+    urls:
+    - https://dinurajdevarajan1234.github.io/Datapipeline-test/kafka-32.3.14.tgz
+    version: 32.3.14
+generated: "2025-08-14T09:31:40.424821023Z"
