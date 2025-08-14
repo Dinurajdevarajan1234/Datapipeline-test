@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: aerospike
+spec:
+  clusterIP: None
+  selector:
+    app: aerospike
+  ports:
+{{- range .Values.service.ports }}
+    - name: {{ .name }}
+      port: {{ .port }}
+      targetPort: {{ .port }}
+{{- end }}
+

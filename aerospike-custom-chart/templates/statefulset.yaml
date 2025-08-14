@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: aerospike
+spec:
+  serviceName: aerospike
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: aerospike
+  template:
+    metadata:
+      labels:
+        app: aerospike
+    spec:
+      containers:
+        - name: aerospike
+          image: {{ .Values.images.server }}
+          ports:
+            - containerPort: 3000
+            - containerPort: 3001
+            - containerPort: 3002
+          volumeMounts:
+            - name: aerospike-data
+              mountPath: /opt/aerospike/data
+        - name: aerospike-tools
+          image: {{ .Values.images.tools }}
+          command: ["tail", "-f", "/dev/null"]
+          volumeMounts:
+            - name: aerospike-data
+              mountPath: /opt/aerospike/data
+  volumeClaimTemplates:
+    - metadata:
+        name: aerospike-data
+      spec:
+        storageClassName: {{ .Values.storage.className }}
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.storage.size }}
+

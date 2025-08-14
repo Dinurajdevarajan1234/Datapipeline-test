@@ -1,0 +1,7 @@
+apiVersion: v2
+name: clickhouse-chart
+description: Custom ClickHouse StatefulSet with config and services for Unosecur Datapipeline POC project
+type: application
+version: 0.1.0
+appVersion: "latest"
+
