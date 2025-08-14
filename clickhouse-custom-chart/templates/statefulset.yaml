@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: clickhouse
+spec:
+  serviceName: clickhouse
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: clickhouse
+  template:
+    metadata:
+      labels:
+        app: clickhouse
+    spec:
+      containers:
+        - name: clickhouse
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 9000
+            - containerPort: 8123
+          env:
+            - name: CLICKHOUSE_USER
+              value: {{ .Values.user }}
+            - name: CLICKHOUSE_PASSWORD
+              value: "{{ .Values.password }}"
+          volumeMounts:
+            - name: clickhouse-config
+              mountPath: /etc/clickhouse-server/users.d/custom_users.xml
+              subPath: custom_users.xml
+            - name: clickhouse-storage
+              mountPath: /var/lib/clickhouse
+      volumes:
+        - name: clickhouse-config
+          configMap:
+            name: clickhouse-config
+  volumeClaimTemplates:
+    - metadata:
+        name: clickhouse-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: {{ .Values.storage.size }}
+{{- if .Values.storage.className }}
+        storageClassName: {{ .Values.storage.className }}
+{{- end }}
+

@@ -1,0 +1,7 @@
+apiVersion: v2
+name: aerospike-chart
+description: Custom Aerospike StatefulSet with tools sidecar for Unosecur Datapipeline POC Project
+type: application
+version: 0.1.0
+appVersion: "latest"
+
